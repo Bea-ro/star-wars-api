@@ -9,15 +9,17 @@ const droidsAnchor = document.querySelector('#droids')
 
 let dataList = []
 let page = 1
-let destination = "characters"
+let destination = "locations"
 
 const getData = async () => {
-  const data = await fetch(`https://starwars-databank.vercel.app/${destination}?page=${page}&limit=10`)
+  const data = await fetch(`https://starwars-databank-server.vercel.app/api/v1/${destination}?page=${page}&limit=10`)
   console.log('1', data)
   const json = await data.json()
   console.log('2', json)
-  dataList = [...dataList, ...json[`${destination}`]]
-  console.log('3', dataList)
+  const dataArray = json.data
+  console.log('3', dataArray)
+  dataList = [...dataList, ...dataArray]
+  console.log('4', dataList)
   mapData(dataList)
 }
 
